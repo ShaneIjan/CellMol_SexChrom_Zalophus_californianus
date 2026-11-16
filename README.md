@@ -173,17 +173,89 @@ This ratio is close to the expected value of 0.5 for an XY individual, supportin
 
 Although the Y:A ratio was unusually high, it was not treated as independent confirmation of sex because Y chromosome coverage may be distorted by repetitive regions and reference-mapping artifacts.
 
-### Summary of R Analysis Outputs
 
-The R analysis generated three files that collectively support the chromosome dosage interpretation.
+## Interpretation and Discussion
 
-| Output file | Purpose |
-|---|---|
-| [`chromosome_relative_depth.csv`](results/chromosome_relative_depth.csv) | Contains chromosome identities, mean depths, and normalized relative depths |
-| [`chromosome_depth.png`](results/chromosome_depth.png) | Visualizes chromosome coverage relative to the median autosomal depth |
-| [`sex_inference.txt`](results/sex_inference.txt) | Reports the median autosomal depth, X:A and Y:A ratios, and XY-like interpretation |
+The California sea lion (*Zalophus californianus*) had an X-to-autosome (X:A) ratio of *0.528*, which is close to the expected value of 0.5 for an XY male. This means the X chromosome had approximately half the sequencing depth of the autosomes, supporting an *XY-like **(male)** sex-chromosome complement*.
 
-The three outputs consistently indicate reduced X-chromosome coverage relative to the autosomes, supporting an XY-like chromosome complement. The unusually elevated Y-chromosome depth remains an important limitation requiring cautious interpretation.
+This finding agrees with the recorded male sex of NCBI BioSample `SAMN12368149`. Since the reference genome and WGS data share the same BioSample, the results can be compared to the same donor.
 
+However, the Y chromosome showed an unusually high relative depth of **2.577**. This may be caused by repetitive DNA, mapping errors, or limitations of the Y chromosome reference assembly.
+
+The results support an *XY-like male California sea lion*, although sequencing-based sex inference is not absolute proof. The X:A ratio provides the strongest evidence, while the unusual Y coverage highlights the limitations of this method.
+
+
+## Report Questions and Answers
+
+### 1. What species did you choose, and what evidence supports a diploid XX/XY or ZZ/ZW system?
+
+I chose the California sea lion (*Zalophus californianus*). As a placental mammal, it has a diploid XX/XY sex-chromosome system, where females are typically XX and males are XY. The NCBI reference genome also identifies separate X and Y chromosomes.
+
+### 2. What are your assembly accession, WGS run, and both BioSample accessions? Are the donors the same?
+
+- **Assembly accession:** `GCF_009762305.2`
+- **WGS run:** `SRR25744544`
+- **Assembly BioSample:** `SAMN12368149`
+- **WGS BioSample:** `SAMN12368149`
+
+Yes. Both datasets have the same BioSample accession which indicates the same recorded donor.
+
+### 3. Which sequences were used as autosomes and as X or Z? How did you verify their identities?
+
+I used 17 autosomes (`NC_045595.1` to `NC_045611.1`) and the X chromosome (`NC_045612.1`). The Y chromosome (`NC_045613.1`) was also examined.
+
+Their identities were verified using NCBI reference genome annotations and the sequence names in the Samtools coverage output.
+
+### 4. What are the median autosomal depth, X:A or Z:A ratio, and inferred sex-chromosome complement?
+
+The median autosomal depth was 16.096×, and the X:A ratio was 0.528. Since this ratio is close to the expected value of 0.5 for an XY male, the results support an XY-like (male) sex-chromosome complement.
+
+### 5. Does your result agree with the recorded sex of the WGS donor, if reported? Explain any discrepancy or uncertainty.
+
+Yes. The inferred XY-like complement agrees with the donor's recorded male sex. However, the Y chromosome had unusually high coverage (Y:A = 2.577), possibly due to repetitive DNA or mapping errors. Therefore, the result is supportive but not absolute confirmation.
+
+### 6. Why is a chromosome-level assembly alone insufficient for a reliable read-depth sex inference?
+
+A reference assembly shows the chromosome sequences but does not provide the sequencing coverage needed to estimate chromosome dosage.
+
+WGS reads must be aligned to the reference genome to measure and compare autosomal and sex-chromosome depths.
+
+## Limitations
+
+Although the chromosome dosage analysis supports an XY-like male California sea lion, several limitations should still be considered:
+
+1. **Read-mapping bias:** Some sequencing reads may align incorrectly which can affect chromosome coverage estimates.
+
+2. **Repetitive DNA:** Repeated sequences, especially on the Y chromosome, may cause unusually high sequencing depth.
+
+3. **Reference genome limitations:** Incomplete or poorly assembled sex-chromosome regions may affect the accuracy of the results.
+
+4. **Sequencing coverage:** Uneven coverage across chromosomes may influence the calculated X:A and Y:A ratios.
+
+5. **Sex inference uncertainty:** Chromosome dosage provides an estimate of the sex-chromosome complement, not absolute confirmation of biological sex.
+
+Despite these limitations, the X:A ratio of **0.528** provides strong support for an **XY-like complement**, that is consistent with the donor's recorded male sex.
+
+
+## References
+
+Galaxy Project. (n.d.). *Galaxy*. https://usegalaxy.org/
+
+National Center for Biotechnology Information. (n.d.-a). *Zalophus californianus genome assembly (GCF_009762305.2)*. https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_009762305.2/
+
+National Center for Biotechnology Information. (n.d.-b). *Zalophus californianus BioSample (SAMN12368149)*. https://www.ncbi.nlm.nih.gov/biosample/SAMN12368149
+
+National Center for Biotechnology Information. (n.d.-c). *Zalophus californianus sequencing run (SRR25744544)*. Sequence Read Archive. https://www.ncbi.nlm.nih.gov/sra/?term=SRR25744544
+
+Posit Software, PBC. (n.d.). *RStudio IDE*. https://posit.co/products/open-source/rstudio/
+
+R Core Team. (n.d.). *R: A language and environment for statistical computing*. R Foundation for Statistical Computing. https://www.r-project.org/
+
+
+## Galaxy History
+
+The following is the link to my Galaxy history, which contains the workflow and results of the sequencing analysis:
+
+**Galaxy History:** https://usegalaxy.org/u/ijanshane17/h/sex-dosage-zalophus-californianus 
 
 
